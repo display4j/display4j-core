@@ -7,6 +7,13 @@ import java.nio.charset.Charset;
 
 import net.fauxpark.oled.font.Font;
 
+/*
+ * Licensed under The MIT License
+ *
+ * Copyright (c) 2017 fauxpark <fauxpark@gmail.com>
+ *
+ * see /LICENSE-MIT
+ */
 /**
  * A wrapper around the SSD1306 with some basic graphics methods.
  *

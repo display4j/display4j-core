@@ -4,6 +4,13 @@ import net.fauxpark.oled.Command;
 import net.fauxpark.oled.Constant;
 import net.fauxpark.oled.SSD1306;
 
+/*
+ * Licensed under The MIT License
+ *
+ * Copyright (c) 2017 fauxpark <fauxpark@gmail.com>
+ *
+ * see /LICENSE-MIT
+ */
 /**
  * A mock SSD1306 driver, for use when testing on platforms other than the Raspberry Pi.
  *

@@ -1,5 +1,12 @@
 package net.fauxpark.oled;
 
+/*
+ * Licensed under The MIT License
+ *
+ * Copyright (c) 2017 fauxpark <fauxpark@gmail.com>
+ *
+ * see /LICENSE-MIT
+ */
 /**
  * This class defines the commands that can be sent to the SSD1306.
  * Some of them are standalone commands and others require arguments following them.

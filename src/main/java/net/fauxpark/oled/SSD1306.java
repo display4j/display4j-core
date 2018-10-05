@@ -1,5 +1,12 @@
 package net.fauxpark.oled;
 
+/*
+ * Licensed under The MIT License
+ *
+ * Copyright (c) 2017 fauxpark <fauxpark@gmail.com>
+ *
+ * see /LICENSE-MIT
+ */
 /**
  * A base class for defining implementations of the SSD1306 OLED display.
  *

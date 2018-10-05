@@ -1,5 +1,12 @@
 package net.fauxpark.oled.font;
 
+/*
+ * Licensed under The MIT License
+ *
+ * Copyright (c) 2017 fauxpark <fauxpark@gmail.com>
+ *
+ * see /LICENSE-MIT
+ */
 /**
  * A basic interface to facilitate font selection in text drawing methods.
  * <br/>

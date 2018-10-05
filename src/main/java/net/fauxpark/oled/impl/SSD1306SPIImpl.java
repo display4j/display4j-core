@@ -14,6 +14,13 @@ import net.fauxpark.oled.Command;
 import net.fauxpark.oled.Constant;
 import net.fauxpark.oled.SSD1306;
 
+/*
+ * Licensed under The MIT License
+ *
+ * Copyright (c) 2017 fauxpark <fauxpark@gmail.com>
+ *
+ * see /LICENSE-MIT
+ */
 /**
  * A simple SPI driver for the Adafruit SSD1306 OLED display.
  *

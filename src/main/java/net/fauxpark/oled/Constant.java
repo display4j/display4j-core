@@ -1,5 +1,12 @@
 package net.fauxpark.oled;
 
+/*
+ * Licensed under The MIT License
+ *
+ * Copyright (c) 2017 fauxpark <fauxpark@gmail.com>
+ *
+ * see /LICENSE-MIT
+ */
 /**
  * This class defines some useful constants, such as memory addressing modes, scrolling speeds and dummy bytes.
  *
