@@ -23,14 +23,14 @@ public class Graphics {
 	/**
 	 * The SSD1306 OLED display.
 	 */
-	private SSD1306 ssd1306;
+	private SSDisplay ssd1306;
 
 	/**
 	 * Graphics constructor.
 	 *
 	 * @param ssd1306 The SSD1306 object to use.
 	 */
-	Graphics(SSD1306 ssd1306) {
+	Graphics(SSDisplay ssd1306) {
 		this.ssd1306 = ssd1306;
 	}
 
