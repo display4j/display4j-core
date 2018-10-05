@@ -8,7 +8,7 @@ package net.fauxpark.oled;
  * see /LICENSE-MIT
  */
 /**
- * This class defines the commands that can be sent to the SSD1306.
+ * This class defines the commands that can be sent to the SSDisplay.
  * Some of them are standalone commands and others require arguments following them.
  * <br/>
  * Please refer to <a href="https://www.adafruit.com/datasheets/SSD1306.pdf">the SSD1306 datasheet</a>
