@@ -1,11 +1,11 @@
-package net.fauxpark.oled;
+package com.github.display4j.core;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.Raster;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
-import net.fauxpark.oled.font.Font;
+import com.github.display4j.core.font.Font;
 
 /*
  * Licensed under The MIT License

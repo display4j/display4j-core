@@ -1,4 +1,4 @@
-package net.fauxpark.oled;
+package com.github.display4j.core;
 
 /*
  * Licensed under The MIT License

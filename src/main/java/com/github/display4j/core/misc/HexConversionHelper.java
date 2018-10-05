@@ -1,4 +1,4 @@
-package net.fauxpark.oled.misc;
+package com.github.display4j.core.misc;
 
 public class HexConversionHelper {
     private static final String[] hexes = new String[]{

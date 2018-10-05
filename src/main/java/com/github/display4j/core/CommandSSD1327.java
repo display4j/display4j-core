@@ -1,4 +1,4 @@
-package net.fauxpark.oled;
+package com.github.display4j.core;
 
 /**
  * commands specific to SSD1327

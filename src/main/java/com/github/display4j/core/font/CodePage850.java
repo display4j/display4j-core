@@ -1,4 +1,4 @@
-package net.fauxpark.oled.font;
+package com.github.display4j.core.font;
 
 /*
  * Licensed under The MIT License

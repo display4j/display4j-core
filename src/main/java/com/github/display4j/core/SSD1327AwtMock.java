@@ -1,6 +1,6 @@
-package net.fauxpark.oled;
+package com.github.display4j.core;
 
-import net.fauxpark.oled.conn.DisplayConnectionMock;
+import com.github.display4j.core.conn.DisplayConnectionMock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

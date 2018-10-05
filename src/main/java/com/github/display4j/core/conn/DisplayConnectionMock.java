@@ -1,6 +1,6 @@
-package net.fauxpark.oled.conn;
+package com.github.display4j.core.conn;
 
-import net.fauxpark.oled.misc.HexConversionHelper;
+import com.github.display4j.core.misc.HexConversionHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

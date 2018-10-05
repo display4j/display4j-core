@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<name>OLED Core</name>
-	<description>SSD1306 Driver Core</description>
-	<groupId>net.fauxpark</groupId>
-	<artifactId>oled-core</artifactId>
-	<version>1.6-SNAPSHOT</version>
+	<name>display4j core</name>
+	<description>SSDxxxx Display driver for Java</description>
+
+	<groupId>com.github.display4j</groupId>
+	<artifactId>display4j-core</artifactId>
+	<version>2.0-SNAPSHOT</version>
 	<modelVersion>4.0.0</modelVersion>
-	<url>https://github.com/fauxpark/oled-core</url>
+
+	<url>https://github.com/display4j/display4j-core</url>
+
 	<packaging>jar</packaging>
 	<licenses>
 		<license>

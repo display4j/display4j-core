@@ -1,7 +1,7 @@
-package net.fauxpark.oled;
+package com.github.display4j.core;
 
+import com.github.display4j.core.conn.DisplayConnection;
 import com.pi4j.io.gpio.Pin;
-import net.fauxpark.oled.conn.DisplayConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

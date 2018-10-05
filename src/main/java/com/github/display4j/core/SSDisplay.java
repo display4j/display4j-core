@@ -1,4 +1,4 @@
-package net.fauxpark.oled;
+package com.github.display4j.core;
 
 /*
  * Licensed under The MIT License
@@ -9,7 +9,7 @@ package net.fauxpark.oled;
  */
 
 import com.pi4j.io.gpio.Pin;
-import net.fauxpark.oled.conn.DisplayConnection;
+import com.github.display4j.core.conn.DisplayConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,7 +36,7 @@ public abstract class SSDisplay {
 	 * A helper class for drawing lines, shapes, text and images.
 	 * @deprecated used anymore?
 	 */
-	private Graphics graphics;
+	private com.github.display4j.core.Graphics graphics;
 
 	/**
 	 * The width of the display in pixels.
@@ -480,7 +480,7 @@ public abstract class SSDisplay {
 	 * @deprecated in use?!
 	 * @return The Graphics instance.
 	 */
-	public final Graphics getGraphics() {
+	public final com.github.display4j.core.Graphics getGraphics() {
 		if(graphics == null) {
 			graphics = new Graphics(this);
 		}

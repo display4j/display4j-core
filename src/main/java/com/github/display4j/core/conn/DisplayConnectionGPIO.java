@@ -1,4 +1,4 @@
-package net.fauxpark.oled.conn;
+package com.github.display4j.core.conn;
 
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;

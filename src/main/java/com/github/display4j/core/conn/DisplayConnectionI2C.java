@@ -1,10 +1,10 @@
-package net.fauxpark.oled.conn;
+package com.github.display4j.core.conn;
 
+import com.github.display4j.core.misc.HexConversionHelper;
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.Pin;
 import com.pi4j.io.i2c.I2CDevice;
 import com.pi4j.io.i2c.I2CFactory;
-import net.fauxpark.oled.misc.HexConversionHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
