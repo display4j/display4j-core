@@ -16,7 +16,7 @@ package net.fauxpark.oled;
  *
  * @author fauxpark
  */
-public class Command {
+public class CommandSSD {
 		/**
 		 * Set the lower column start address for page addressing mode.
 		 */

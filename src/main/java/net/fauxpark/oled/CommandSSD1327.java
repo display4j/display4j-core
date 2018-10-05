@@ -3,7 +3,7 @@ package net.fauxpark.oled;
 /**
  * commands specific to SSD1327
  */
-public class CommandSSD1327 extends Command {
+public class CommandSSD1327 extends CommandSSD {
 
     //public final int SET_REMAP                              = 0xA0;
 
