@@ -4,7 +4,7 @@
 	<description>SSD1306 Driver Core</description>
 	<groupId>net.fauxpark</groupId>
 	<artifactId>oled-core</artifactId>
-	<version>1.5</version>
+	<version>1.6-SNAPSHOT</version>
 	<modelVersion>4.0.0</modelVersion>
 	<url>https://github.com/fauxpark/oled-core</url>
 	<packaging>jar</packaging>
@@ -37,6 +37,18 @@
 			<groupId>com.pi4j</groupId>
 			<artifactId>pi4j-core</artifactId>
 			<version>1.2-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.25</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.7.25</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	<repositories>
