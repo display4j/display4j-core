@@ -31,8 +31,8 @@ public class SSD1327AwtMock extends SSD1327{
 
 
 
-    public SSD1327AwtMock() {
-        super(new DisplayConnectionMock());
+    public SSD1327AwtMock(int width, int height) {
+        super(new DisplayConnectionMock(), width, height);
         init();
     }
 
@@ -51,8 +51,8 @@ public class SSD1327AwtMock extends SSD1327{
      * DEFAULT_SLOW_DOWN_FACTOR is default
      * </p>
      */
-    public SSD1327AwtMock(int displayScaleFactor, int displaySlowDownFactor) {
-        super(new DisplayConnectionMock());
+    public SSD1327AwtMock(int width, int height, int displayScaleFactor, int displaySlowDownFactor) {
+        super(new DisplayConnectionMock(), width, height);
         this.displayScaleFactor = displayScaleFactor;
         this.displaySlowDownFactor = displaySlowDownFactor;
         init();

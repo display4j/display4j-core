@@ -111,8 +111,6 @@ public abstract class SSDisplay {
 		this.height = height;
 
 		this.commandset = getCommandset();
-
-		buffer = getNewBuffer();
 	}
 
 	/**
@@ -131,6 +129,8 @@ public abstract class SSDisplay {
 	public abstract void startup(boolean externalVcc) throws IOException;
 
 	protected void basicStartup(boolean externalVcc) throws IOException {
+        buffer = getNewBuffer();
+
 		setDisplayOn(true);
 		setInverted(false);
 		clearBuffer();

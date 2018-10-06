@@ -20,11 +20,9 @@ import java.io.IOException;
 public class SSD1327 extends SSDisplay {
     private static final Logger logger = LoggerFactory.getLogger(SSD1327.class);
 
-    public static final int WIDTH = 128;
-    public static final int HEIGHT = 128;
     public static final int COLOR_BITS_PER_PIXEL = 4;
 
-    public static int ROW_SIZE_IN_BYTES = WIDTH * COLOR_BITS_PER_PIXEL / 8;
+    public int ROW_SIZE_IN_BYTES = 0;
 
 
     // public static final int DEFAULT_REMAP_CONFIG = 0b0;
@@ -39,9 +37,10 @@ public class SSD1327 extends SSDisplay {
     public CommandSSD1327 commandset = new CommandSSD1327();
 
 
-    public SSD1327(DisplayConnection dspConn) {
-        super(dspConn, WIDTH, HEIGHT);
+    public SSD1327(DisplayConnection dspConn, int width, int height) {
+        super(dspConn, width, height);
         super.commandset = this.commandset;
+        ROW_SIZE_IN_BYTES = width * COLOR_BITS_PER_PIXEL / 8;
     }
 
 
@@ -80,7 +79,7 @@ public class SSD1327 extends SSDisplay {
 
     private void resetColumnAndRowStartEndAddress() throws IOException {
         setColumnStartEndAddress(0, ROW_SIZE_IN_BYTES - 1);
-        setRowStartEndAddress(0, HEIGHT - 1);
+        setRowStartEndAddress(0, height - 1);
     }
 
     public void setDisplayStartLine(int line) throws IOException {
@@ -243,7 +242,7 @@ public class SSD1327 extends SSDisplay {
         return true;
     }
 
-    public static int getBufferArrayElementForPixel(int x, int y) {
+    public int getBufferArrayElementForPixel(int x, int y) {
         return x / 2 + y * ROW_SIZE_IN_BYTES;
     }
 
