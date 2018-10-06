@@ -59,7 +59,7 @@ public class SSD1327 extends SSDisplay {
         setDisplayOn(false);
 
         // set mulitplex-ratio to default (127)
-        dspConn.command(commandset.SET_MULTIPLEX_RATIO, 127);
+        dspConn.command(commandset.SET_MULTIPLEX_RATIO, height - 1);
 
         dspConn.command(commandset.SET_CONTRAST, 0x7F);
 
