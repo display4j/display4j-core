@@ -88,7 +88,9 @@ As the SSD controllers do not provide any information as to its state, these are
 
 ## 2D Graphics with AWT
 
-You can also do line & shape drawing using the `Graphics2D` class from `java.awt`.
+You can also do line & shape drawing using the `Graphics2D` class from `java.awt`, load images and render
+fonts. On greyscale devices this automatically enables anti-aliasing.
+
 Just call the `getGraphics2D()` method on the `SSDisplay` instance:
 
 ```java
@@ -127,6 +129,31 @@ In addition, it is possible to create your own character sets by implementing `F
 
 ## Issues and limitations
 
+### Font rendering issues using Mocks
+If you compare the font output of the display with the output of the Mock on your DEV machine
+you might encounter a difference in the font rendering (appearance and size).
+This is not because of differences in implementation between device vs. Mock... but if
+you´re working on Windows on your DEV machine (like me) and run the device implementation
+on the Raspberry - you just see that both systems use different fonts. This is more a Linux
+vs. Windows issue.
+
+You can circumvent that if you develop on Linux yourself or your project includes 
+it´s own TTF fonts and loads it like described 
+in [https://docs.oracle.com/javase/tutorial/2d/text/fonts.html](https://docs.oracle.com/javase/tutorial/2d/text/fonts.html).
+
+```java
+try {
+     GraphicsEnvironment ge = 
+         GraphicsEnvironment.getLocalGraphicsEnvironment();
+     ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("A.ttf"));
+} catch (IOException|FontFormatException e) {
+     //Handle exception
+}
+```
+
+Or you don´t use Graphics2D and use the legacy font rendering (see above).
+
+
 ### I2C Mode (& grey-scale displays - like SDD1327)
 
 Because of the larger amounts of data needed to transfer on every display update
@@ -137,6 +164,16 @@ Refer to [https://www.raspberrypi-spy.co.uk/2018/02/change-raspberry-pi-i2c-bus-
 
 This might not be such a huge problem using sw-displays but might be a limiting factor there too.
 The display update of SSD1306 with 128 x 64 px x 1 BPP consumes 1024 bytes.
+
+
+## To be done / wish list
+
+* support more devices / test other dimensions
+* implement a method for only updating an area of the whole display
+
+## Contributions
+
+Contributions are welcome... 
 
 ## Credits
 
