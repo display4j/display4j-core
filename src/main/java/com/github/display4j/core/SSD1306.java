@@ -24,11 +24,6 @@ public class SSD1306 extends SSDisplay {
         init();
     }
 
-    public SSD1306(DisplayConnection dspConn, int width, int height, Pin rstPin) {
-        super(dspConn, width, height, rstPin);
-        init();
-    }
-
     private void init() {
         pages = height / 8;
         super.commandset = this.commandset;

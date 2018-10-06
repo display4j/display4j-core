@@ -12,7 +12,7 @@ The aim of this project is to abstract away the low-level aspects of the SSD and
 | Device                              | state                |
 |-------------------------------------|----------------------|
 | SSD1306                             | working SPI and I2C  |
-| SSD1327 (128px * 128px * 4bit grey) | in progress          |
+| SSD1327 (128px * 128px * 4bit grey) | working I2C (and should with SPI - is there a SPI variant?)        |
 
 Other types should be easy to add if pixel-bitsize is the same
 

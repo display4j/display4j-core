@@ -1,4 +1,4 @@
-package com.github.display4j.core.conn;
+package com.github.display4j.core.conn.pi4j;
 
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioPinDigitalOutput;

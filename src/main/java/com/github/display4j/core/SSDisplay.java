@@ -8,7 +8,6 @@ package com.github.display4j.core;
  * see /LICENSE-MIT
  */
 
-import com.pi4j.io.gpio.Pin;
 import com.github.display4j.core.conn.DisplayConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -102,14 +101,11 @@ public abstract class SSDisplay {
 	 * @param height The height of the display in pixels.
 	 */
 	public SSDisplay(DisplayConnection dspConn, int width, int height) {
-		init(dspConn, width, height, null);
+		init(dspConn, width, height);
 	}
 
-	public SSDisplay(DisplayConnection dspConn, int width, int height, Pin rstPin) {
-		init(dspConn, width, height, rstPin);
-	}
 
-	private void init(DisplayConnection dspConn, int width, int height, Pin rstPin) {
+	private void init(DisplayConnection dspConn, int width, int height) {
 		this.dspConn = dspConn;
 		this.width = width;
 		this.height = height;
