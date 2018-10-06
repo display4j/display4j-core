@@ -21,6 +21,7 @@ public class SSD1327AwtMock extends SSD1327{
 
 
     int displayScaleFactor = DEFAULT_SCALE_FACTOR;
+    int pixelSizeFactor = DEFAULT_SCALE_FACTOR;
     protected int displaySlowDownFactor = DEFAULT_SLOW_DOWN_FACTOR;
 
     JFrame displayFrame;
@@ -59,6 +60,9 @@ public class SSD1327AwtMock extends SSD1327{
     }
 
     private void init() {
+        if (displayScaleFactor > 2) {
+            pixelSizeFactor = displayScaleFactor - 1; // keep space
+        }
         displayFrame = new JFrame(this.getClass().getSimpleName());
         displayFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         displayFrame.setSize(width * displayScaleFactor + paddingX * displayScaleFactor, height * displayScaleFactor + paddingY * displayScaleFactor);
@@ -88,7 +92,7 @@ public class SSD1327AwtMock extends SSD1327{
 
     private void setPixelRgb(int x, int y, int[] rgb) {
         bufferedImage.setRGB(x* displayScaleFactor + paddingX, y* displayScaleFactor + paddingY,
-                displayScaleFactor, displayScaleFactor, rgb, 0, 0);
+                pixelSizeFactor, pixelSizeFactor, rgb, 0, 0);
     }
 
     @Override
