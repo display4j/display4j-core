@@ -5,3 +5,6 @@ Thumbs.db
 .idea/
 *.iml
 tmp
+.project
+.classpath
+

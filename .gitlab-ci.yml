@@ -1,0 +1,11 @@
+image: maven:3-jdk-8
+
+stages:
+  - build
+
+build:
+  stage: build
+  script: mvn package install
+  artifacts:
+    paths:
+      - target/display4j-core-2.0-SNAPSHOT.jar
