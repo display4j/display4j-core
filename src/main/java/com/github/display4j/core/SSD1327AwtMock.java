@@ -25,6 +25,8 @@ public class SSD1327AwtMock extends SSD1327{
     protected int displaySlowDownFactor = DEFAULT_SLOW_DOWN_FACTOR;
 
     JFrame displayFrame;
+
+    // drawing to this buffer for output
     BufferedImage bufferedImage;
     //Graphics2D bufferAsGraphics;
 
@@ -69,12 +71,17 @@ public class SSD1327AwtMock extends SSD1327{
         displayFrame.setVisible(true);
         displayFrame.setResizable(false);
 
-        bufferedImage = new BufferedImage(width * displayScaleFactor + paddingX * displayScaleFactor, height * displayScaleFactor + paddingY * displayScaleFactor, BufferedImage.TYPE_BYTE_GRAY);
+        bufferedImage = new BufferedImage(
+                width * displayScaleFactor + paddingX * displayScaleFactor,
+                height * displayScaleFactor + paddingY * displayScaleFactor,
+                BufferedImage.TYPE_BYTE_GRAY);
     }
 
+    @Override
     public boolean setPixel(int x, int y, boolean on) {
         return setPixel(x, y, 255);
     }
+
     @Override
     public boolean setPixel(int x, int y, int grey) {
         if(x < 0 || x >= width || y < 0 || y >= height) {
@@ -90,9 +97,21 @@ public class SSD1327AwtMock extends SSD1327{
         return true;
     }
 
+    /**
+     * drawing to buffered image
+     * @param x
+     * @param y
+     * @param rgb
+     */
     private void setPixelRgb(int x, int y, int[] rgb) {
-        bufferedImage.setRGB(x* displayScaleFactor + paddingX, y* displayScaleFactor + paddingY,
-                pixelSizeFactor, pixelSizeFactor, rgb, 0, 0);
+        bufferedImage.setRGB(
+                x* displayScaleFactor + paddingX,
+                y* displayScaleFactor + paddingY,
+                pixelSizeFactor,
+                pixelSizeFactor,
+                rgb,
+                0,
+                0);
     }
 
     @Override
