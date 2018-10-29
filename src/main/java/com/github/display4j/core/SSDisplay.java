@@ -111,6 +111,8 @@ public abstract class SSDisplay {
 		this.height = height;
 
 		this.commandset = getCommandset();
+
+		buffer = getNewBuffer();
 	}
 
 	/**
