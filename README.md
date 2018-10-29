@@ -9,12 +9,13 @@ The aim of this project is to abstract away the low-level aspects of the SSD and
 | Device    | Mock |
 |-----------|------|
 |![example of SSD1327](https://raw.githubusercontent.com/display4j/display4j-docs/master/img/IMG_20181005_195320_cut.jpg)|![example of SSD1327 Awt Mock](https://raw.githubusercontent.com/display4j/display4j-docs/master/img/ssd1327_awt_mock_128_128.png)|
+|![example of SSD1306](https://raw.githubusercontent.com/display4j/display4j-docs/master/img/IMG_20181029_222258__01__01.jpg)|![example of SSD1306 Awt Mock](https://raw.githubusercontent.com/display4j/display4j-docs/master/img/ssd1306_awt_mock_128_64.png)|
 
 ### Display support
 
 | Device                              | state                |
 |-------------------------------------|----------------------|
-| SSD1306                             | working SPI and I2C  |
+| SSD1306 (128px * 32 / 64 pxx * 1bit | working SPI and I2C  |
 | SSD1327 (128px * 128px * 4bit grey) | working I2C (and should with SPI - is there a SPI variant?)        |
 
 Other types should be easy to add if pixel-bitsize is the same
