@@ -13,7 +13,7 @@ public class SSD1306 extends SSDisplay {
     private static final Logger logger = LoggerFactory.getLogger(SSD1306.class);
     public static final int COLOR_BITS_PER_PIXEL = 1;
 
-    int pages = 0;
+    //int pages = 0;
 
     public CommandSSD1306 commandset = new CommandSSD1306();
 
@@ -25,7 +25,6 @@ public class SSD1306 extends SSDisplay {
     }
 
     private void init() {
-        pages = height / 8;
         super.commandset = this.commandset;
     }
 
@@ -94,14 +93,14 @@ public class SSD1306 extends SSDisplay {
         /**
          * The number of pages in the display.
          */
-        byte[] buffer = new byte[width * pages];
+        byte[] buffer = new byte[width * height / 8];
         return buffer;
     }
 
     @Override
     public synchronized void display() throws IOException {
         dspConn.command(commandset.SET_COLUMN_ADDRESS, 0, width - 1);
-        dspConn.command(commandset.SET_PAGE_ADDRESS, 0, pages - 1);
+        dspConn.command(commandset.SET_PAGE_ADDRESS, 0, height / 8 - 1);
 
         super.display();
     }

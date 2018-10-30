@@ -1,6 +1,7 @@
 package com.github.display4j.core;
 
 import com.github.display4j.core.conn.DisplayConnectionMock;
+import com.github.display4j.core.misc.AwtMockHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,27 +13,13 @@ import java.io.IOException;
 
 public class SSD1327AwtMock extends SSD1327{
     private static final Logger logger = LoggerFactory.getLogger(SSD1327AwtMock.class);
-    public static final int DEFAULT_SCALE_FACTOR = 3;
-    public static final int DEFAULT_SLOW_DOWN_FACTOR = 50;
-
-    // TODO why is this needed?
-    int paddingX=20;
-    int paddingY=30;
-
-
-    int displayScaleFactor = DEFAULT_SCALE_FACTOR;
-    int pixelSizeFactor = DEFAULT_SCALE_FACTOR;
-    protected int displaySlowDownFactor = DEFAULT_SLOW_DOWN_FACTOR;
 
     JFrame displayFrame;
 
     // drawing to this buffer for output
     BufferedImage bufferedImage;
-    //Graphics2D bufferAsGraphics;
 
-
-
-
+    AwtMockHelper awtMockHelper = null;
 
     public SSD1327AwtMock(int width, int height) {
         super(new DisplayConnectionMock(), width, height);
@@ -56,25 +43,21 @@ public class SSD1327AwtMock extends SSD1327{
      */
     public SSD1327AwtMock(int width, int height, int displayScaleFactor, int displaySlowDownFactor) {
         super(new DisplayConnectionMock(), width, height);
-        this.displayScaleFactor = displayScaleFactor;
-        this.displaySlowDownFactor = displaySlowDownFactor;
         init();
+        awtMockHelper.setDisplayScaleFactor(displayScaleFactor);
+        awtMockHelper.setDisplaySlowDownFactor(displaySlowDownFactor);
     }
 
     private void init() {
-        if (displayScaleFactor > 2) {
-            pixelSizeFactor = displayScaleFactor - 1; // keep space
-        }
+        awtMockHelper = new AwtMockHelper(this);
+
+        bufferedImage = awtMockHelper.getBufferedImage(BufferedImage.TYPE_BYTE_GRAY);
+
         displayFrame = new JFrame(this.getClass().getSimpleName());
         displayFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        displayFrame.setSize(width * displayScaleFactor + paddingX * displayScaleFactor, height * displayScaleFactor + paddingY * displayScaleFactor);
+        displayFrame.setSize(bufferedImage.getWidth(), bufferedImage.getHeight());
         displayFrame.setVisible(true);
         displayFrame.setResizable(false);
-
-        bufferedImage = new BufferedImage(
-                width * displayScaleFactor + paddingX * displayScaleFactor,
-                height * displayScaleFactor + paddingY * displayScaleFactor,
-                BufferedImage.TYPE_BYTE_GRAY);
     }
 
     @Override
@@ -91,27 +74,10 @@ public class SSD1327AwtMock extends SSD1327{
         Color col = (new Color(grey, grey, grey));
 
         int[] rgb = {col.getRGB(), col.getRGB(), col.getRGB()};
-        setPixelRgb(x, y, rgb);
+        awtMockHelper.setPixelRgb(bufferedImage, x, y, rgb);
 
 
         return true;
-    }
-
-    /**
-     * drawing to buffered image
-     * @param x
-     * @param y
-     * @param rgb
-     */
-    private void setPixelRgb(int x, int y, int[] rgb) {
-        bufferedImage.setRGB(
-                x* displayScaleFactor + paddingX,
-                y* displayScaleFactor + paddingY,
-                pixelSizeFactor,
-                pixelSizeFactor,
-                rgb,
-                0,
-                0);
     }
 
     @Override
@@ -119,9 +85,7 @@ public class SSD1327AwtMock extends SSD1327{
         logger.info("display");
         java.awt.Graphics g = displayFrame.getGraphics();
         g.drawImage(bufferedImage, 0,0, null);
-        try {
-            Thread.sleep((long) (displaySlowDownFactor * 2.2)); // slow down
-        } catch (Exception ex) {}
+        awtMockHelper.sleepAfterDraw();
     }
 
     @Override
@@ -149,20 +113,12 @@ public class SSD1327AwtMock extends SSD1327{
                 int rgb = super.bufferedImage.getRGB(x, y);
                 int[] rgbA = {rgb, rgb, rgb};
 
-                setPixelRgb(x, y, rgbA);
+                awtMockHelper.setPixelRgb(bufferedImage, x, y, rgbA);
             }
         }
 
         if (display) {
             display();
         }
-    }
-
-    public int getDisplaySlowDownFactor() {
-        return displaySlowDownFactor;
-    }
-
-    public void setDisplaySlowDownFactor(int displaySlowDownFactor) {
-        this.displaySlowDownFactor = displaySlowDownFactor;
     }
 }

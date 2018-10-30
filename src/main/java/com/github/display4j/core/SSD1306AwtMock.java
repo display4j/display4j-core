@@ -1,6 +1,7 @@
 package com.github.display4j.core;
 
 import com.github.display4j.core.conn.DisplayConnectionMock;
+import com.github.display4j.core.misc.AwtMockHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,29 +12,17 @@ import java.io.IOException;
 
 public class SSD1306AwtMock extends SSD1306 {
     private static final Logger logger = LoggerFactory.getLogger(SSD1306AwtMock.class);
-    public static final int DEFAULT_SCALE_FACTOR = 3;
-    public static final int DEFAULT_SLOW_DOWN_FACTOR = 50;
 
-    // TODO why is this needed?
-    int paddingX=20;
-    int paddingY=30;
+    int[] rgbaOn = new int[]{Color.white.getRGB(),Color.white.getRGB(),Color.white.getRGB()};
+    int[] rgbaOff = new int[]{Color.black.getRGB(),Color.black.getRGB(),Color.black.getRGB()};
 
-    int[] rgbaOn = new int[]{255, 255, 255};
-    int[] rgbaOff = new int[]{0, 0, 0};
-
-
-    int displayScaleFactor = DEFAULT_SCALE_FACTOR;
-    int pixelSizeFactor = DEFAULT_SCALE_FACTOR;
-    protected int displaySlowDownFactor = DEFAULT_SLOW_DOWN_FACTOR;
 
     JFrame displayFrame;
 
     // drawing to this buffer for output
     BufferedImage bufferedImage;
-    //Graphics2D bufferAsGraphics;
 
-
-
+    AwtMockHelper awtMockHelper = null;
 
 
     public SSD1306AwtMock(int width, int height) {
@@ -58,29 +47,22 @@ public class SSD1306AwtMock extends SSD1306 {
      */
     public SSD1306AwtMock(int width, int height, int displayScaleFactor, int displaySlowDownFactor) {
         super(new DisplayConnectionMock(), width, height);
-        this.displayScaleFactor = displayScaleFactor;
-        this.displaySlowDownFactor = displaySlowDownFactor;
         init();
+        awtMockHelper.setDisplayScaleFactor(displayScaleFactor);
+        awtMockHelper.setDisplaySlowDownFactor(displaySlowDownFactor);
     }
 
-    private void init() {
-        if (displayScaleFactor > 2) {
-            pixelSizeFactor = displayScaleFactor - 1; // keep space
-        }
+    private void init()
+    {
+        awtMockHelper = new AwtMockHelper(this);
+
+        bufferedImage = awtMockHelper.getBufferedImage(BufferedImage.TYPE_BYTE_BINARY);
+
         displayFrame = new JFrame(this.getClass().getSimpleName());
         displayFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        displayFrame.setSize(width * displayScaleFactor + paddingX * displayScaleFactor, height * displayScaleFactor + paddingY * displayScaleFactor);
+        displayFrame.setSize(bufferedImage.getWidth(), bufferedImage.getHeight());
         displayFrame.setVisible(true);
         displayFrame.setResizable(false);
-
-        rgbaOff = new int[]{Color.black.getRGB(),Color.black.getRGB(),Color.black.getRGB()};
-        rgbaOn = new int[]{Color.white.getRGB(),Color.white.getRGB(),Color.white.getRGB()};
-
-
-        bufferedImage = new BufferedImage(
-            width * displayScaleFactor + paddingX * displayScaleFactor,
-            height * displayScaleFactor + paddingY * displayScaleFactor,
-            BufferedImage.TYPE_BYTE_BINARY);
     }
 
 
@@ -91,14 +73,7 @@ public class SSD1306AwtMock extends SSD1306 {
         }
 
         int[] rgb = on ? rgbaOn : rgbaOff;
-        bufferedImage.setRGB(
-                x* displayScaleFactor + paddingX,
-                y* displayScaleFactor + paddingY,
-                pixelSizeFactor,
-                pixelSizeFactor,
-                rgb,
-                0,
-                0);
+        awtMockHelper.setPixelRgb(bufferedImage, x, y, rgb);
         return true;
     }
 
@@ -108,9 +83,7 @@ public class SSD1306AwtMock extends SSD1306 {
         logger.info("display");
         java.awt.Graphics g = displayFrame.getGraphics();
         g.drawImage(bufferedImage, 0,0, null);
-        try {
-            Thread.sleep((long) (displaySlowDownFactor * 2.2)); // slow down
-        } catch (Exception ex) {}
+        awtMockHelper.sleepAfterDraw();
     }
 
     @Override
@@ -126,10 +99,7 @@ public class SSD1306AwtMock extends SSD1306 {
             for (int x=0; x<width; x++) {
                 int rgb = super.bufferedImage.getRGB(x, y);
                 int rgbA = rgb & 0xff;
-                int rgbB = rgb & 0xff00 >> 8;
-                int rgbC = rgb & 0xff0000 >> 16;
 
-                //setPixelRgb(x, y, rgbA);
                 setPixel(x, y, (rgbA > 0));
             }
         }
@@ -137,13 +107,5 @@ public class SSD1306AwtMock extends SSD1306 {
         if (display) {
             display();
         }
-    }
-
-    public int getDisplaySlowDownFactor() {
-        return displaySlowDownFactor;
-    }
-
-    public void setDisplaySlowDownFactor(int displaySlowDownFactor) {
-        this.displaySlowDownFactor = displaySlowDownFactor;
     }
 }
