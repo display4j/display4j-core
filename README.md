@@ -162,11 +162,12 @@ Or you don´t use Graphics2D and use the legacy font rendering (see above).
 Because of the larger amounts of data needed to transfer on every display update
 when using grayscale-displays
 (f.e. the SDD1327 has 128 x 128 pixel x 4 bits per pixel = 8129 bytes), perhaps you may consider speeding up your I2C bus from default 100 kHz to 400 kHz.
+Even on 400 kHz the I2C bus is barely capable to update the display with more than 5.5 FPS (400.000 Hz / 8 bits ~= 50.000 Bytes incl. overhead ~= 6.1 FPS).
 
-Refer to [https://www.raspberrypi-spy.co.uk/2018/02/change-raspberry-pi-i2c-bus-speed/](https://www.raspberrypi-spy.co.uk/2018/02/change-raspberry-pi-i2c-bus-speed/)
+Refer to [https://www.raspberrypi-spy.co.uk/2018/02/change-raspberry-pi-i2c-bus-speed/](https://www.raspberrypi-spy.co.uk/2018/02/change-raspberry-pi-i2c-bus-speed/).
 
 This might not be such a huge problem using sw-displays but might be a limiting factor there too.
-The display update of SSD1306 with 128 x 64 px x 1 BPP consumes 1024 bytes.
+The display update of SSD1306 with 128 x 64 px x 1 BPP consumes 1024 bytes - should be sufficient for up to 11 FPS on 100 kHz and 40 FPS on 400 kHz.
 
 
 ## To be done / wish list
