@@ -247,7 +247,7 @@ public class SSD1327 extends SSDisplay {
     }
 
     public byte[] getNewBuffer() {
-        return new byte[width * height * COLOR_BITS_PER_PIXEL];
+        return new byte[width * height * COLOR_BITS_PER_PIXEL / 8];
     }
 
     public int getColorBitsPerPixel() {
