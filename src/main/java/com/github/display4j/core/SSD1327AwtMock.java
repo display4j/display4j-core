@@ -17,7 +17,7 @@ public class SSD1327AwtMock extends SSD1327{
     JFrame displayFrame;
 
     // drawing to this buffer for output
-    BufferedImage bufferedImage;
+    BufferedImage mockBufferedImage;
 
     AwtMockHelper awtMockHelper = null;
 
@@ -51,20 +51,18 @@ public class SSD1327AwtMock extends SSD1327{
     private void init() {
         awtMockHelper = new AwtMockHelper(this);
 
-        bufferedImage = awtMockHelper.getBufferedImage(BufferedImage.TYPE_BYTE_GRAY);
+        mockBufferedImage = awtMockHelper.getBufferedImage(BufferedImage.TYPE_BYTE_GRAY);
 
         displayFrame = new JFrame(this.getClass().getSimpleName());
         displayFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        displayFrame.setSize(bufferedImage.getWidth(), bufferedImage.getHeight());
+        displayFrame.setSize(mockBufferedImage.getWidth(), mockBufferedImage.getHeight());
         displayFrame.setVisible(true);
         displayFrame.setResizable(false);
     }
 
-    @Override
-    public boolean setPixel(int x, int y, boolean on) {
-        return setPixel(x, y, 255);
-    }
 
+
+    /** draw to virtual buffer */
     @Override
     public boolean setPixel(int x, int y, int grey) {
         if(x < 0 || x >= width || y < 0 || y >= height) {
@@ -74,7 +72,7 @@ public class SSD1327AwtMock extends SSD1327{
         Color col = (new Color(grey, grey, grey));
 
         int[] rgb = {col.getRGB(), col.getRGB(), col.getRGB()};
-        awtMockHelper.setPixelRgb(bufferedImage, x, y, rgb);
+        awtMockHelper.setPixelRgb(mockBufferedImage, x, y, rgb);
 
 
         return true;
@@ -84,7 +82,7 @@ public class SSD1327AwtMock extends SSD1327{
     public synchronized void display() throws IOException {
         logger.info("display");
         java.awt.Graphics g = displayFrame.getGraphics();
-        g.drawImage(bufferedImage, 0,0, null);
+        g.drawImage(mockBufferedImage, 0,0, null);
         awtMockHelper.sleepAfterDraw();
     }
 
@@ -113,7 +111,7 @@ public class SSD1327AwtMock extends SSD1327{
                 int rgb = super.bufferedImage.getRGB(x, y);
                 int[] rgbA = {rgb, rgb, rgb};
 
-                awtMockHelper.setPixelRgb(bufferedImage, x, y, rgbA);
+                awtMockHelper.setPixelRgb(mockBufferedImage, x, y, rgbA);
             }
         }
 
